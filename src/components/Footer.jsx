@@ -1,5 +1,6 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
-import { SiGmail } from 'react-icons/si'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Footer = () => {
   const scrollTo = (id) => {
@@ -38,13 +39,13 @@ const Footer = () => {
             <h4>Connect</h4>
             <div className="social-row">
               <a href="https://github.com/XE-front" aria-label="GitHub" target="_blank" rel="noreferrer">
-                <FaGithub />
+                <FontAwesomeIcon icon={faGithub} />
                 </a>
               <a href="https://www.linkedin.com/in/xena-emit/" aria-label="LinkedIn" target="_blank" rel="noreferrer">
-                <FaLinkedin />
+                <FontAwesomeIcon icon={faLinkedin} />
               </a>
               <a href="mailto:xenaemit1231@gmail.com" aria-label="Email">
-                <SiGmail />
+                <FontAwesomeIcon icon={faEnvelope} />
               </a>
             </div>
           </div>

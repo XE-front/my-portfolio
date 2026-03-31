@@ -1,5 +1,6 @@
-import { FaGithub, FaLinkedin, FaChevronDown } from 'react-icons/fa'
-import { SiGmail } from 'react-icons/si'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faChevronDown, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Hero = () => {
   const handleScrollDown = () => {
@@ -26,14 +27,14 @@ const Hero = () => {
                 </p>
                 <div className="social-row hero-socials">
                     <a href="https://github.com/XE-front" aria-label="GitHub" target="_blank" rel="noreferrer">
-                    <FaGithub />
+                  <FontAwesomeIcon icon={faGithub} />
                     </a>
                     <a  href="https://www.linkedin.com/in/xena-emit/" aria-label="LinkedIn" target="_blank" rel="noreferrer"
                     >
-                    <FaLinkedin />
+                  <FontAwesomeIcon icon={faLinkedin} />
                     </a>
                     <a href="mailto:xenaemit1231@gmail.com" aria-label="Gmail">
-                    <SiGmail />
+                  <FontAwesomeIcon icon={faEnvelope} />
                     </a>
                 </div>
             </div>
@@ -44,7 +45,7 @@ const Hero = () => {
         </div>
         <div className="hero-arrow">
         <button type="button" aria-label="Scroll to About" onClick={handleScrollDown}>
-            <FaChevronDown />
+            <FontAwesomeIcon icon={faChevronDown} />
         </button>
         </div>
     </section>
