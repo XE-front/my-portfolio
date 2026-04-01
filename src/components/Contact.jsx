@@ -1,4 +1,46 @@
+import { useState, useRef } from 'react'
+import emailjs from '@emailjs/browser'
+
+
 const Contact = () => {
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState('')
+  const [isSending, setIsSending] = useState(false)
+  const formRef = useRef(null)
+
+  const handleChange = (event) => {
+    const { id, value } = event.target
+    setForm((prev) => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    if (!form.name || !form.email || !form.message) {
+      setStatus('Please fill in all fields before sending.')
+      return
+    }
+
+    if (isSending) return
+
+    try {
+      setIsSending(true)
+      setStatus('Sending message...')
+
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, {
+        publicKey: PUBLIC_KEY,
+      })
+
+      setStatus('Message sent! I will get back to you soon.')
+      setForm({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error('EmailJS error', error)
+      setStatus('Something went wrong sending your message. Please try again.')
+    } finally {
+      setIsSending(false)
+    }
+  }
+
   return (
     <section className="section section-alt" id="contact">
       <div className="container contact-grid">
@@ -40,22 +82,47 @@ const Contact = () => {
             </li>
           </ul>
         </div>
-        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="contact-form" onSubmit={handleSubmit} ref={formRef}>
           <div className="form-field">
             <label htmlFor="name">Name</label>
-            <input id="name" type="text" placeholder="Your name" />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Your name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-field">
             <label htmlFor="email">Email</label>
-            <input id="email" type="email" placeholder="your.email@example.com" />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="your.email@example.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-field">
             <label htmlFor="message">Message</label>
-            <textarea id="message" rows="4" placeholder="Your message..."></textarea>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Your message..."
+              value={form.message}
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
-          <button type="submit" className="btn-primary full-width">
-            Send Message
+          <button type="submit" className="btn-primary full-width" disabled={isSending}>
+            {isSending ? 'Sending...' : 'Send Message'}
           </button>
+          {status && <p className="form-status">{status}</p>}
         </form>
       </div>
     </section>

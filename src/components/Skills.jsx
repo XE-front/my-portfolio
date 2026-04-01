@@ -1,7 +1,7 @@
 const skills = {
   frontend: ['React', 'JavaScript', 'Vue.js', 'HTML5', 'CSS3 / Tailwind CSS'],
   backend: ['Laravel', 'PHP', 'REST APIs', 'Database', 'MySQL'],
-  tools: ['Git', 'GitHub', 'VS Code', 'Postman'],
+  tools: ['Git', 'GitHub', 'VS Code'],
 }
 
 const additionalSkills = [

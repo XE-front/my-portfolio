@@ -2,11 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
+const NAV_OFFSET = 80
+
 const Footer = () => {
   const scrollTo = (id) => {
     const el = document.getElementById(id)
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const rect = el.getBoundingClientRect()
+      const targetY = rect.top + window.pageYOffset - NAV_OFFSET
+      window.scrollTo({ top: targetY, behavior: 'smooth' })
     }
   }
 
