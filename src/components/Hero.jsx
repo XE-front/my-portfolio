@@ -37,6 +37,15 @@ const Hero = () => {
                   <FontAwesomeIcon icon={faEnvelope} />
                     </a>
                 </div>
+                <div className="hero-built-with">
+                  <p className="hero-built-title">This Portfolio Built With</p>
+                  <ul className="hero-built-list">
+                    <li>React</li>
+                    <li>Vite</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>CSS3</li>
+                  </ul>
+                </div>
             </div>
             <div className="hero-portrait hero-column">
                 <div className="hero-blob" aria-hidden="true"></div>

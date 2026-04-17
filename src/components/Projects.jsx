@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import pathwayImg from '../assets/Pathway.png'
 import rentechImg from '../assets/Rentech.png'
 import gigLocalImg from '../assets/GigLocal.png'
@@ -39,13 +40,30 @@ const projects = [
 ]
 
 const Projects = () => {
+  const [activeProject, setActiveProject] = useState(null)
+
+  const handleCloseModal = () => {
+    setActiveProject(null)
+  }
+
   return (
     <section className="section" id="projects">
       <div className="container">
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
           {projects.map((project) => (
-            <article className="project-card" key={project.title}>
+            <article
+              className="project-card project-card-clickable"
+              key={project.title}
+              onClick={() => setActiveProject(project)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  setActiveProject(project)
+                }
+              }}
+            >
               <div className="project-media" aria-hidden="true">
                 <img src={project.image} alt={project.title} className="project-image" />
               </div>
@@ -68,6 +86,7 @@ const Projects = () => {
                       href={project.codeUrl}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={(event) => event.stopPropagation()}
                     >
                       Code
                     </a>
@@ -78,6 +97,7 @@ const Projects = () => {
                       href={project.demoUrl}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={(event) => event.stopPropagation()}
                     >
                       Demo
                     </a>
@@ -88,6 +108,69 @@ const Projects = () => {
           ))}
         </div>
       </div>
+      {activeProject && (
+        <div className="project-modal" role="dialog" aria-modal="true">
+          <button
+            className="project-modal-backdrop"
+            type="button"
+            aria-label="Close project details"
+            onClick={handleCloseModal}
+          />
+          <div
+            className="project-modal-card"
+            role="document"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="project-modal-close"
+              type="button"
+              onClick={handleCloseModal}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <div className="project-modal-media">
+              <img src={activeProject.image} alt={activeProject.title} />
+            </div>
+            <div className="project-modal-body">
+              <h3>
+                {activeProject.title}
+                {activeProject.role && (
+                  <span className="project-label">{activeProject.role}</span>
+                )}
+              </h3>
+              <p>{activeProject.description}</p>
+              <div className="project-modal-tags">
+                {activeProject.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+              <div className="project-links">
+                {activeProject.codeUrl && (
+                  <a
+                    className="link-button"
+                    href={activeProject.codeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Code
+                  </a>
+                )}
+                {activeProject.demoUrl && (
+                  <a
+                    className="link-button"
+                    href={activeProject.demoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Demo
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

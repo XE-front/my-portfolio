@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGraduationCap, faSchool, faCode, faBullseye } from '@fortawesome/free-solid-svg-icons'
+
 const About = () => {
   return (
     <section className="section" id="about">
@@ -6,29 +9,61 @@ const About = () => {
         <div className="about-grid">
           <div className="about-text">
             <p>
-              I&apos;m a passionate full-stack web developer who enjoys building practical and user-focused web applications. 
-              I specialize in creating efficient and scalable solutions that address real-world problems.
+              I&apos;m a full-stack web developer who enjoys building practical and user-friendly web apps. 
+              I like turning ideas into working systems and figuring out how things work behind the scenes.
             </p>
             <p>
-              My journey in web development started from a curiosity about how websites work, and it has 
-              grown into a continuous pursuit of learning and improving my skills with modern technologies.
+              I originally got into web development out of curiosity, and it slowly turned into something I really enjoy doing. Since then,
+               I&apos;ve been learning as I go and improving my skills with different tools and technologies.
             </p>
             <p>
-              I have experience working with JavaScript, React, Vue.js, Laravel, and MySQL, and I enjoy 
-              developing systems that are both functional and user-friendly.
+              I&apos;ve worked with JavaScript, React, Vue.js, Laravel, and MySQL, 
+              and I enjoy working on both the front-end and back-end parts of a project.
             </p>
             <p>
-              Outside of coding, I spend time exploring new technologies, improving my projects, and 
-              staying updated with current trends in web development.
+              When I&apos;m not coding, I usually spend 
+              time exploring new tools, improving my projects, or just keeping up with what’s new in web development.
             </p>
           </div>
-          <aside className="quick-facts">
-            <h3>This Portfolio Built With</h3>
+          <aside className="about-highlights">
+            <h3>Quick Facts</h3>
             <ul>
-              <li>React</li>
-              <li>Vite</li>
-              <li>JavaScript (ES6+)</li>
-              <li>CSS3</li>
+              <li>
+                <span className="about-meta-icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={faGraduationCap} />
+                </span>
+                <div className="about-meta-content">
+                  <span className="about-meta-label">Bachelors</span>
+                  <span className="about-meta-value">Bachelor of Science in Computer Science</span>
+                </div>
+              </li>
+              <li>
+                <span className="about-meta-icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={faSchool} />
+                </span>
+                <div className="about-meta-content">
+                  <span className="about-meta-label">Graduated From</span>
+                  <span className="about-meta-value">STI College - General Santos</span>
+                </div>
+              </li>
+              <li>
+                <span className="about-meta-icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={faCode} />
+                </span>
+                <div className="about-meta-content">
+                  <span className="about-meta-label">Coding For</span>
+                  <span className="about-meta-value">2 years</span>
+                </div>
+              </li>
+              <li>
+                <span className="about-meta-icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={faBullseye} />
+                </span>
+                <div className="about-meta-content">
+                  <span className="about-meta-label">Focus</span>
+                  <span className="about-meta-value">Full-stack web apps</span>
+                </div>
+              </li>
             </ul>
           </aside>
         </div>

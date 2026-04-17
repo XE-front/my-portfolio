@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
 
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -18,6 +21,11 @@ const Contact = () => {
 
     if (!form.name || !form.email || !form.message) {
       setStatus('Please fill in all fields before sending.')
+      return
+    }
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      setStatus('Contact form is not configured yet. Please try again later.')
       return
     }
 
