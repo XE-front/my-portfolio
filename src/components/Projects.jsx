@@ -87,7 +87,9 @@ const Projects = () => {
             onClick={handlePrevProject}
             aria-label="Show previous project"
           >
-            ‹
+            <span className="project-nav-icon" aria-hidden="true">
+              ‹
+            </span>
           </button>
 
           <article
@@ -158,7 +160,9 @@ const Projects = () => {
             onClick={handleNextProject}
             aria-label="Show next project"
           >
-            ›
+            <span className="project-nav-icon" aria-hidden="true">
+              ›
+            </span>
           </button>
         </div>
         <div className="project-indicators" aria-label="Project carousel indicators">
