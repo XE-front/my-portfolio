@@ -1,4 +1,5 @@
 import './App.css'
+import { Analytics } from "@vercel/analytics/react"
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -10,6 +11,7 @@ import Footer from './components/Footer.jsx'
 function App() {
   return (
     <div className="page">
+      <Analytics />
       <Nav />
       <main>
         <Hero />

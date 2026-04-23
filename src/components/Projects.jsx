@@ -2,6 +2,7 @@ import { useState } from 'react'
 import pathwayImg from '../assets/Pathway.png'
 import rentechImg from '../assets/Rentech.png'
 import gigLocalImg from '../assets/GigLocal.png'
+import ailImg from '../assets/aiImg.png'
 
 const projects = [
   {
@@ -31,16 +32,45 @@ const projects = [
     description:
       'A hyperlocal platform that connects people with nearby service providers for quick, on-demand tasks and freelance work.',
     tags: [
-      'Laravel', 'Vue.js', 'Tailwind CSS','Inertia.js', 'MySQL', 'Responsive Design','Hyperlocal Services',
+      'Laravel', 'Vue.js', 'PHP','Tailwind CSS','Inertia.js', 'MySQL', 'Responsive Design','Hyperlocal Services',
       'On-Demand Platform', 'Freelance Marketplace', 'Service Booking', 'Local Gigs',
     ],
     image: gigLocalImg,
     codeUrl: 'https://github.com/XE-front/giglocal',
   },
+  {
+    title: 'AI Resume Analyzer',
+    role: 'Personal Project',
+    description:
+      'A full-stack web application that analyzes resumes using AI and provides users with actionable feedback, score trends, and a history dashboard',
+    tags: [
+      'Laravel', 'React', 'PHP', 'Typescript', 'Vite', 'Tailwind CSS','Inertia.js', 'MySQL', 'Artificial Intelligence', 'Resume Analysis', 
+      'Feedback System', 'Score Trends', 'Web Application',
+    ],
+    image: ailImg,
+    codeUrl: 'https://github.com/XE-front/ai-resume-analyzer',
+  },
 ]
 
 const Projects = () => {
   const [activeProject, setActiveProject] = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const currentProject = projects[currentIndex]
+
+  const handlePrevProject = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? projects.length - 1 : prevIndex - 1,
+    )
+  }
+
+  const handleNextProject = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length)
+  }
+
+  const handleSelectProject = (index) => {
+    setCurrentIndex(index)
+  }
 
   const handleCloseModal = () => {
     setActiveProject(null)
@@ -50,61 +80,99 @@ const Projects = () => {
     <section className="section" id="projects">
       <div className="container">
         <h2 className="section-title">Featured Projects</h2>
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <article
-              className="project-card project-card-clickable"
+        <div className="projects-carousel">
+          <button
+            className="project-nav project-nav-prev"
+            type="button"
+            onClick={handlePrevProject}
+            aria-label="Show previous project"
+          >
+            ‹
+          </button>
+
+          <article
+            className="project-card project-card-clickable project-slide"
+            key={currentProject.title}
+            onClick={() => setActiveProject(currentProject)}
+            role="button"
+            tabIndex={0}
+            aria-label={`Open details for ${currentProject.title}`}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                setActiveProject(currentProject)
+              }
+            }}
+          >
+            <div className="project-media" aria-hidden="true">
+              <img
+                src={currentProject.image}
+                alt={currentProject.title}
+                className="project-image"
+              />
+            </div>
+            <div className="project-body">
+              <h3>
+                {currentProject.title}
+                {currentProject.role && (
+                  <span className="project-label">{currentProject.role}</span>
+                )}
+              </h3>
+              <p>{currentProject.description}</p>
+              <div className="project-tags">
+                {currentProject.tags.slice(0, 6).map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+                {currentProject.tags.length > 6 && <span>...</span>}
+              </div>
+              <div className="project-links">
+                {currentProject.codeUrl && (
+                  <a
+                    className="link-button"
+                    href={currentProject.codeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    Code
+                  </a>
+                )}
+                {currentProject.demoUrl && (
+                  <a
+                    className="link-button"
+                    href={currentProject.demoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    Demo
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+
+          <button
+            className="project-nav project-nav-next"
+            type="button"
+            onClick={handleNextProject}
+            aria-label="Show next project"
+          >
+            ›
+          </button>
+        </div>
+        <div className="project-indicators" aria-label="Project carousel indicators">
+          {projects.map((project, index) => (
+            <button
               key={project.title}
-              onClick={() => setActiveProject(project)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  setActiveProject(project)
-                }
-              }}
-            >
-              <div className="project-media" aria-hidden="true">
-                <img src={project.image} alt={project.title} className="project-image" />
-              </div>
-              <div className="project-body">
-                <h3>
-                  {project.title}
-                  {project.role && <span className="project-label">{project.role}</span>}
-                </h3>
-                <p>{project.description}</p>
-                <div className="project-tags">
-                  {project.tags.slice(0, 6).map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                  {project.tags.length > 6 && <span>...</span>}
-                </div>
-                <div className="project-links">
-                  {project.codeUrl && (
-                    <a
-                      className="link-button"
-                      href={project.codeUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(event) => event.stopPropagation()}
-                    >
-                      Code
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      className="link-button"
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(event) => event.stopPropagation()}
-                    >
-                      Demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
+              type="button"
+              className={`project-indicator ${
+                index === currentIndex ? 'project-indicator-active' : ''
+              }`}
+              onClick={() => handleSelectProject(index)}
+              aria-label={`Go to project ${index + 1}: ${project.title}`}
+              aria-current={index === currentIndex ? 'true' : undefined}
+            />
           ))}
         </div>
       </div>

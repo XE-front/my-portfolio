@@ -421,10 +421,70 @@ main {
 
 /* Projects */
 
-.projects-grid {
+.projects-carousel {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.project-slide {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.project-nav {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid #204352;
+  background: #0f1b23;
+  color: #3ce59a;
+  font-size: 1.8rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-nav:hover {
+  transform: translateY(-2px);
+  border-color: #3ce59a;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+.project-nav:focus-visible {
+  outline: 2px solid #3ce59a;
+  outline-offset: 2px;
+}
+
+.project-indicators {
+  margin-top: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.project-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: #24424f;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.project-indicator:hover {
+  transform: scale(1.15);
+}
+
+.project-indicator-active {
+  background: #3ce59a;
 }
 
 .project-card {
@@ -820,10 +880,18 @@ main {
 
   .about-grid,
   .skills-grid,
-  .projects-grid,
   .contact-grid,
   .about-cards {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .projects-carousel {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .project-nav {
+    display: none;
   }
 
   .hero h1 {
@@ -929,11 +997,14 @@ main {
   }
 
   .skills-grid,
-  .projects-grid,
   .about-cards,
   .contact-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem;
+  }
+
+  .project-card:hover {
+    transform: translateY(-3px);
   }
 
   .footer-inner {
